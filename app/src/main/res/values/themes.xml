@@ -5,5 +5,5 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.OBDScan" parent="Base.Theme.OBDScan" />
+    <style name="Theme.OBDScan" parent="Theme.Material3.Light.NoActionBar" />
 </resources>
