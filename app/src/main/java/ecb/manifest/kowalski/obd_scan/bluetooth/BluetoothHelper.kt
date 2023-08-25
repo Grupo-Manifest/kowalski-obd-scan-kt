@@ -2,8 +2,11 @@ package ecb.manifest.kowalski.obd_scan.bluetooth
 
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothSocket
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.view.View
 import android.widget.Toast
@@ -11,7 +14,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LifecycleOwner
+import java.io.IOException
 
 class BluetoothHelper(private val activity: ComponentActivity,
                       private val lifecycleOwner: LifecycleOwner) {
@@ -42,6 +47,36 @@ class BluetoothHelper(private val activity: ComponentActivity,
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
         if (result.resultCode == AppCompatActivity.RESULT_OK) { bluetoothScan() }
+    }
+
+    fun connectToDevice(device: BluetoothDevice): BluetoothSocket? {
+        var bluetoothSocket: BluetoothSocket? = null
+
+        if (ActivityCompat.checkSelfPermission(
+            activity,
+            Manifest.permission.BLUETOOTH_CONNECT
+        ) != PackageManager.PERMISSION_GRANTED) {
+            try {
+                bluetoothSocket = device.createRfcommSocketToServiceRecord(device.uuids[0].uuid)
+            } catch (e: IOException) {
+                return null
+            }
+        }
+        return bluetoothSocket
+    }
+
+    fun getPairedDevices(): MutableSet<BluetoothDevice>? {
+        val bluetoothManager: BluetoothManager =
+            activity.getSystemService(BluetoothManager::class.java)
+        val bluetoothAdapter: BluetoothAdapter? = bluetoothManager.adapter
+
+        val _pairedDevices = if (ActivityCompat.checkSelfPermission(
+                activity,
+                Manifest.permission.BLUETOOTH_CONNECT
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {} else {}
+
+        return bluetoothAdapter?.bondedDevices
     }
 
     private fun isBluetoothEnabled(): Boolean {
