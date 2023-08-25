@@ -1,21 +1,11 @@
 package ecb.manifest.kowalski.obd_scan.ui.main
 
-import android.Manifest
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothManager
-import android.content.Intent
-import android.os.Build
-import android.os.Build.VERSION
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import ecb.manifest.kowalski.obd_scan.bluetooth.BluetoothHelper
 import ecb.manifest.kowalski.obd_scan.databinding.ActivityMainBinding
 import ecb.manifest.kowalski.obd_scan.ui.adapters.ViewPagerAdapter
 
@@ -28,9 +18,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: ViewPagerAdapter
 
-    private var bluetoothPermission: Boolean = false
+    private lateinit var bluetoothHelper: BluetoothHelper
 
-    // TODO: Proper modularization
+    // TODO: The View should only interact with BluetoothHelper through the ViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -40,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         viewPager2 = binding.viewPager
 
         adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+
+        bluetoothHelper = BluetoothHelper(this, this)
 
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
@@ -64,56 +56,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        scanBluetooth(binding.root)
-    }
-
-    // TODO
-    private fun scanBluetooth(view: View) {
-        val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
-        val bluetoothAdapter: BluetoothAdapter? = bluetoothManager.adapter
-
-        if (bluetoothAdapter == null) {
-            Toast.makeText(this, "Device doesn't support Bluetooth", Toast.LENGTH_LONG)
-                .show()
-        } else {
-            if (VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                bluetoothPermissionLauncher.launch(Manifest.permission.BLUETOOTH_CONNECT)
-            } else {
-                bluetoothPermissionLauncher.launch(Manifest.permission.BLUETOOTH_ADMIN)
-            }
-        }
-    }
-
-    // TODO
-    private val bluetoothPermissionLauncher = registerForActivityResult(
-        RequestPermission()
-    ) { isGranted: Boolean ->
-        val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
-        val bluetoothAdapter: BluetoothAdapter? = bluetoothManager.adapter
-
-        if (isGranted) {
-            bluetoothPermission = true
-            if (bluetoothAdapter?.isEnabled == false) {
-                val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                bluetoothActivityResultLauncher.launch(enableBluetoothIntent)
-            } else {
-                bluetoothScan()
-            }
-        } else {
-            bluetoothPermission = false
-        }
-    }
-
-    private val bluetoothActivityResultLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        if (result.resultCode == RESULT_OK) {
-            bluetoothScan()
-        }
-    }
-
-    private fun bluetoothScan() {
-        Toast.makeText(this, "Bluetooth connected successfully", Toast.LENGTH_LONG)
-            .show()
+        bluetoothHelper.scanBluetooth(binding.root)
     }
 }
