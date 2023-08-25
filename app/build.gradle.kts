@@ -57,4 +57,7 @@ dependencies {
 
     // Saved state module for ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
+
+    // AndroidOBD
+    implementation("com.pnuema.android:obd:1.4.0")
 }
