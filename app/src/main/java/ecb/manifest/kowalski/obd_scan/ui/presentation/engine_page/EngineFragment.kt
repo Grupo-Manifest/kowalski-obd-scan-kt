@@ -1,4 +1,4 @@
-package ecb.manifest.kowalski.obd_scan.ui.obd_pages.engine_page
+package ecb.manifest.kowalski.obd_scan.ui.presentation.engine_page
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

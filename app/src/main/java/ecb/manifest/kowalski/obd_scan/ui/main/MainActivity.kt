@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.Column
 import com.iamageo.tablayout.MagicTabItem
 import com.iamageo.tablayout.MagicTabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import ecb.manifest.kowalski.obd_scan.ui.obd_pages.engine_page.EnginePage
-import ecb.manifest.kowalski.obd_scan.ui.obd_pages.fuel_page.FuelPage
-import ecb.manifest.kowalski.obd_scan.ui.obd_pages.status_page.StatusPage
+import ecb.manifest.kowalski.obd_scan.ui.presentation.engine_page.EnginePage
+import ecb.manifest.kowalski.obd_scan.ui.presentation.fuel_page.FuelPage
+import ecb.manifest.kowalski.obd_scan.ui.presentation.status_page.StatusPage
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

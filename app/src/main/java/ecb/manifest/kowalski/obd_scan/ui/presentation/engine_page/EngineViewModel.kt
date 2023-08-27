@@ -1,7 +1,6 @@
-package ecb.manifest.kowalski.obd_scan.ui.obd_pages.engine_page
+package ecb.manifest.kowalski.obd_scan.ui.presentation.engine_page
 
 import androidx.activity.ComponentActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ecb.manifest.kowalski.obd_scan.bluetooth.BluetoothHelper
