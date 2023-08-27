@@ -5,6 +5,14 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.45" apply false
 }
 
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+
 buildscript {
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.45")

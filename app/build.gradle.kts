@@ -28,6 +28,12 @@ android {
             )
         }
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.1"
+    }
     viewBinding {
         enable = true
     }
@@ -59,6 +65,25 @@ dependencies {
 
     // Saved state module for ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
+
+    // Jetpack Compose
+    val composeBom = platform("androidx.compose:compose-bom:2023.01.00")
+    implementation(composeBom)
+
+    // Material Design 3
+    implementation("androidx.compose.material3:material3")
+    // Android Studio Preview support
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    // Optional - Integration with activities
+    implementation("androidx.activity:activity-compose:1.7.2")
+    // Optional - Integration with ViewModels
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+    // Optional - Integration with LiveData
+    implementation("androidx.compose.runtime:runtime-livedata")
+
+    // Magic TabLayout
+    implementation("com.github.iamageo:MagicTabLayout:1.0.1")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.45")
