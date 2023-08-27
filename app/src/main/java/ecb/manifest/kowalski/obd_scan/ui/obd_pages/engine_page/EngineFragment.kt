@@ -5,9 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
-import ecb.manifest.kowalski.obd_scan.R
-import ecb.manifest.kowalski.obd_scan.bluetooth.BluetoothHelper
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import ecb.manifest.kowalski.obd_scan.databinding.FragmentEngineBinding
 
 class EngineFragment : Fragment() {
@@ -20,22 +25,23 @@ class EngineFragment : Fragment() {
     ): View? {
         binding = FragmentEngineBinding.inflate(layoutInflater)
 
-        // viewModel = ViewModelProvider(this)[EngineViewModel::class.java]
-
         return binding.root
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//        viewModel.rpmData.observe(viewLifecycleOwner) { rpmData ->
-//            binding.rpmLabel.text = rpmData
-//        }
-//
-//        viewModel.fetchData()
-//    }
 
     override fun onStop() {
         viewModel.rpmData.removeObservers(viewLifecycleOwner)
         super.onStop()
+    }
+}
+
+@Preview
+@Composable
+fun EnginePage() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(text = "Engine Page Component Placeholder")
     }
 }
