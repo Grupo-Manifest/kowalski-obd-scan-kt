@@ -82,6 +82,11 @@ dependencies {
     // Optional - Integration with LiveData
     implementation("androidx.compose.runtime:runtime-livedata")
 
+    // Paging Compose
+    val accompanistVersion = "0.30.0"
+    implementation("com.google.accompanist:accompanist-pager:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-pager-indicators:$accompanistVersion")
+
     // Hilt
     implementation("com.google.dagger:hilt-android:2.45")
     kapt("com.google.dagger:hilt-android-compiler:2.45")
