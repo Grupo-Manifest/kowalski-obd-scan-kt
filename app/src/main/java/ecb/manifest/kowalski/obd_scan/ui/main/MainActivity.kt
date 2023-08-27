@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 import ecb.manifest.kowalski.obd_scan.bluetooth.BluetoothHelper
 import ecb.manifest.kowalski.obd_scan.databinding.ActivityMainBinding
 import ecb.manifest.kowalski.obd_scan.ui.adapters.ViewPagerAdapter
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
