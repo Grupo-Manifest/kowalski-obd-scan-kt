@@ -1,15 +1,18 @@
 package ecb.manifest.kowalski.obd_scan.ui.presentation.bluetooth_page
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
@@ -19,14 +22,25 @@ fun BluetoothPage(
     val state by viewModel.state.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        BluetoothDeviceList(
-            pairedDevices = state.pairedDevices,
-            scannedDevices = state.scannedDevices,
-            onClick = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-        )
+        when {
+            state.isConnecting -> {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+            }
+            else -> {
+                BluetoothDeviceList(
+                    pairedDevices = state.pairedDevices,
+                    scannedDevices = state.scannedDevices,
+                    onClick = {},
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                )
+            }
+        }
 
         Row(
             modifier = Modifier.fillMaxWidth(),
