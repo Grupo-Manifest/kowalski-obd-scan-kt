@@ -3,6 +3,7 @@ package ecb.manifest.kowalski.obd_scan.ui.presentation.bluetooth_page
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ecb.manifest.kowalski.obd_scan.bluetooth.BluetoothDeviceDomain
 import ecb.manifest.kowalski.obd_scan.bluetooth.IBluetoothController
 import ecb.manifest.kowalski.obd_scan.bluetooth.IConnectionResult
 import ecb.manifest.kowalski.obd_scan.ui.presentation.BluetoothUiState
@@ -44,6 +45,11 @@ class BluetoothPageViewModel @Inject constructor(
                 errorMessage = error
             ) }
         }.launchIn(viewModelScope)
+    }
+
+    fun connectToDevice(device: BluetoothDeviceDomain) {
+        _state.update { it.copy(isConnecting = true) }
+        bluetoothController.connectToDevice(device).listen()
     }
 
     fun startScan() {
