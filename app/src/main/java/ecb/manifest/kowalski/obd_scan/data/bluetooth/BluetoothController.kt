@@ -9,10 +9,14 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import ecb.manifest.kowalski.obd_scan.bluetooth.BluetoothDeviceDomain
 import ecb.manifest.kowalski.obd_scan.bluetooth.IBluetoothController
+import ecb.manifest.kowalski.obd_scan.bluetooth.IConnectionResult
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
+import java.util.UUID
 
 @SuppressLint("MissingPermission")
 class BluetoothController(private val context: Context) : IBluetoothController {
@@ -61,6 +65,14 @@ class BluetoothController(private val context: Context) : IBluetoothController {
         bluetoothAdapter?.cancelDiscovery()
     }
 
+    override fun connectToDevice(device: BluetoothDeviceDomain): Flow<IConnectionResult> {
+        TODO("Not yet implemented")
+    }
+
+    override fun closeConnection() {
+        TODO("Not yet implemented")
+    }
+
     override fun release() {
         context.unregisterReceiver(foundDeviceReceiver)
     }
@@ -76,4 +88,8 @@ class BluetoothController(private val context: Context) : IBluetoothController {
 
     private fun hasPermission(permission: String): Boolean =
         context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
+
+    companion object {
+        const val SERVICE_UUID = "123"
+    }
 }

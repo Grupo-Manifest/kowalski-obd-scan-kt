@@ -10,7 +10,6 @@ interface IBluetoothController {
     fun startDiscovery()
     fun stopDiscovery()
 
-    fun startBluetoothServer(): Flow<IConnectionResult>
     fun connectToDevice(device: BluetoothDeviceDomain): Flow<IConnectionResult>
 
     fun closeConnection()
