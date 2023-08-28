@@ -4,18 +4,23 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import ecb.manifest.kowalski.obd_scan.bluetooth.BluetoothDeviceDomain
 import ecb.manifest.kowalski.obd_scan.bluetooth.IBluetoothController
 import ecb.manifest.kowalski.obd_scan.bluetooth.IConnectionResult
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.update
+import java.io.IOException
 import java.util.UUID
 
 @SuppressLint("MissingPermission")
@@ -42,6 +47,8 @@ class BluetoothController(private val context: Context) : IBluetoothController {
         }
     }
 
+    private var bluetoothSocket: BluetoothSocket? = null
+
     init {
         updatePairedDevices()
     }
@@ -66,7 +73,30 @@ class BluetoothController(private val context: Context) : IBluetoothController {
     }
 
     override fun connectToDevice(device: BluetoothDeviceDomain): Flow<IConnectionResult> {
-        TODO("Not yet implemented")
+        return flow {
+            if (!hasPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
+                throw SecurityException("No BLUETOOTH_CONNECT permission")
+            }
+
+            bluetoothSocket = bluetoothAdapter
+                ?.getRemoteDevice(device.address)
+                ?.createRfcommSocketToServiceRecord(UUID.fromString(SSP_UUID))
+
+            stopDiscovery()
+
+            bluetoothSocket?.let { socket ->
+                try {
+                    socket.connect()
+                    emit(IConnectionResult.ConnectionEstablished)
+                } catch (e: IOException) {
+                    socket.close()
+                    bluetoothSocket = null
+                    emit(IConnectionResult.Error("Connection was interrupted"))
+                }
+            }
+        }.onCompletion {
+            closeConnection()
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun closeConnection() {
