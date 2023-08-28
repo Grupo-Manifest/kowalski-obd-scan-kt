@@ -8,32 +8,37 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import ecb.manifest.kowalski.obd_scan.ui.main.MainActivityViewModel
 import ecb.manifest.kowalski.obd_scan.ui.presentation.BluetoothUiState
 
 @Composable
 fun BluetoothPage(
-    state: BluetoothUiState,
-    onStartScan: () -> Unit,
-    onStopScan: () -> Unit,
+    viewModel: MainActivityViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
+    val state by viewModel.state.collectAsState()
+
     Column(modifier = Modifier.fillMaxSize()) {
         BluetoothDeviceList(
             pairedDevices = state.pairedDevices,
             scannedDevices = state.scannedDevices,
             onClick = {},
-            modifier = Modifier.fillMaxWidth().weight(1f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
         )
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
-            Button(onClick = onStartScan) {
+            Button(onClick = viewModel::startScan) {
                 Text(text = "Start scanning")
             }
 
-            Button(onClick = onStopScan) {
+            Button(onClick = viewModel::stopScan) {
                 Text(text = "Stop scanning")
             }
         }
