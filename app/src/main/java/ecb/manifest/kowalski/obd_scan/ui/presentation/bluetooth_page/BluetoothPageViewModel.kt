@@ -8,7 +8,10 @@ import ecb.manifest.kowalski.obd_scan.ui.presentation.BluetoothUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,6 +29,18 @@ class BluetoothPageViewModel @Inject constructor(
             pairedDevices = pairedDevices,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), _state.value)
+
+    init {
+        bluetoothController.isConnected.onEach { isConnected ->
+            _state.update { it.copy(isConnected = isConnected) }
+        }.launchIn(viewModelScope)
+
+        bluetoothController.errors.onEach { error ->
+            _state.update { it.copy(
+                errorMessage = error
+            ) }
+        }.launchIn(viewModelScope)
+    }
 
     fun startScan() {
         bluetoothController.startDiscovery()
