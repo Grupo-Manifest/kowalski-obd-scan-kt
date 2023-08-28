@@ -1,5 +1,7 @@
 package ecb.manifest.kowalski.obd_scan.ui.presentation.bluetooth_page
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,16 +12,29 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun BluetoothPage(
-    viewModel: BluetoothPageViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    viewModel: BluetoothPageViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+    context: Context = LocalContext.current
 ) {
     val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(key1 = state.errorMessage) {
+        state.errorMessage?.let { message ->
+            Toast.makeText(
+                context.applicationContext,
+                message,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize()) {
         when {
