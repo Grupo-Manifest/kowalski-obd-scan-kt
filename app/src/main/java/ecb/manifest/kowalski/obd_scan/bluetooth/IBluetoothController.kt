@@ -1,5 +1,6 @@
 package ecb.manifest.kowalski.obd_scan.bluetooth
 
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
 interface IBluetoothController {
@@ -9,5 +10,9 @@ interface IBluetoothController {
     fun startDiscovery()
     fun stopDiscovery()
 
+    fun startBluetoothServer(): Flow<IConnectionResult>
+    fun connectToDevice(device: BluetoothDeviceDomain): Flow<IConnectionResult>
+
+    fun closeConnection()
     fun release()
 }
