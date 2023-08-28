@@ -49,7 +49,7 @@ fun BluetoothPage(
                 BluetoothDeviceList(
                     pairedDevices = state.pairedDevices,
                     scannedDevices = state.scannedDevices,
-                    onClick = {},
+                    onClick = viewModel::connectToDevice,
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),
