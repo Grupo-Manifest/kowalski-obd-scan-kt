@@ -1,4 +1,4 @@
-package ecb.manifest.kowalski.obd_scan.ui.obd_pages.fuel_page
+package ecb.manifest.kowalski.obd_scan.ui.presentation.status_page
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,14 +9,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
+
 @Preview
 @Composable
-fun FuelPage() {
+fun StatusPage() {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(text = "Fuel Page Component Placeholder")
+        Text(text = "Status Page Component Placeholder")
     }
 }
