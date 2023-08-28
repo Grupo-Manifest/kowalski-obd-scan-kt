@@ -100,11 +100,13 @@ class BluetoothController(private val context: Context) : IBluetoothController {
     }
 
     override fun closeConnection() {
-        TODO("Not yet implemented")
+        bluetoothSocket?.close()
+        bluetoothSocket = null
     }
 
     override fun release() {
         context.unregisterReceiver(foundDeviceReceiver)
+        closeConnection()
     }
 
     private fun updatePairedDevices() {
