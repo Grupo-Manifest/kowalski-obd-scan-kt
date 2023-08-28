@@ -83,4 +83,9 @@ class BluetoothPageViewModel @Inject constructor(
             }
             .launchIn(viewModelScope)
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        bluetoothController.release()
+    }
 }
