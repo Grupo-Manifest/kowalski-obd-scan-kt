@@ -35,6 +35,8 @@ class BluetoothPageViewModel @Inject constructor(
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), _state.value)
 
+    private var deviceConnectionJob: Job? = null
+
     init {
         bluetoothController.isConnected.onEach { isConnected ->
             _state.update { it.copy(isConnected = isConnected) }
@@ -49,7 +51,9 @@ class BluetoothPageViewModel @Inject constructor(
 
     fun connectToDevice(device: BluetoothDeviceDomain) {
         _state.update { it.copy(isConnecting = true) }
-        bluetoothController.connectToDevice(device).listen()
+        deviceConnectionJob = bluetoothController
+            .connectToDevice(device)
+            .listen()
     }
 
     fun startScan() {
