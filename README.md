@@ -1,2 +1,2 @@
-> TODO: Refactor Bluetooth connection
-> TODO: Refactor OBD connection
+> TODO: Implement Bluetooth connection  
+> TODO: Refactor OBD connection  
