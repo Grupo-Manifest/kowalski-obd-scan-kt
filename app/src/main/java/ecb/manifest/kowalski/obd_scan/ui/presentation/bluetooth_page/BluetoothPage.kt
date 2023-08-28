@@ -11,12 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import ecb.manifest.kowalski.obd_scan.ui.main.MainActivityViewModel
-import ecb.manifest.kowalski.obd_scan.ui.presentation.BluetoothUiState
 
 @Composable
 fun BluetoothPage(
-    viewModel: MainActivityViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    viewModel: BluetoothPageViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
     val state by viewModel.state.collectAsState()
 
