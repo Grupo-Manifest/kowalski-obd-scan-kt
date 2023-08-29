@@ -72,7 +72,7 @@ class BluetoothController(private val context: Context) : IBluetoothController {
     }
 
     private var _bluetoothSocket: BluetoothSocket? = null
-    val bluetoothSocket: BluetoothSocket?
+    override val bluetoothSocket: BluetoothSocket?
         get() = _bluetoothSocket
 
     init {
