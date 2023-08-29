@@ -2,10 +2,15 @@ package ecb.manifest.kowalski.obd_scan.ui.presentation.engine_page
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ecb.manifest.kowalski.obd_scan.data.bluetooth.BluetoothController
+import dagger.hilt.android.lifecycle.HiltViewModel
+import ecb.manifest.kowalski.obd_scan.bluetooth.IBluetoothController
 import ecb.manifest.kowalski.obd_scan.obd.ObdManager
+import javax.inject.Inject
 
-class EngineViewModel(private val bluetoothController: BluetoothController) : ViewModel() {
+@HiltViewModel
+class EngineViewModel @Inject constructor(
+    private val bluetoothController: IBluetoothController
+) : ViewModel() {
     val rpmData: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
