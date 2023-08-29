@@ -34,6 +34,23 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        checkBluetoothPermissions()
+
+        setContent {
+            Column() {
+                MagicTabLayout(tabList = tabs)
+            }
+        }
+    }
+
+    private val tabs = listOf(
+        MagicTabItem(title = "Bluetooth") { BluetoothPage() },
+        MagicTabItem(title = "Fuel")   { FuelPage()   },
+        MagicTabItem(title = "Engine") { EnginePage() },
+        MagicTabItem(title = "Status") { StatusPage() },
+    )
+
+    private fun checkBluetoothPermissions() {
         val enableBluetoothLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { }
@@ -60,18 +77,5 @@ class MainActivity : ComponentActivity() {
                 )
             )
         }
-
-        setContent {
-            Column() {
-                MagicTabLayout(tabList = tabs)
-            }
-        }
     }
-
-    private val tabs = listOf(
-        MagicTabItem(title = "Bluetooth") { BluetoothPage() },
-        MagicTabItem(title = "Fuel")   { FuelPage()   },
-        MagicTabItem(title = "Engine") { EnginePage() },
-        MagicTabItem(title = "Status") { StatusPage() },
-    )
 }
