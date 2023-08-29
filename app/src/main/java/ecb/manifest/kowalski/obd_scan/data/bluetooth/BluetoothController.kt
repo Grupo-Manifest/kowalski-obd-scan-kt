@@ -71,7 +71,9 @@ class BluetoothController(private val context: Context) : IBluetoothController {
         }
     }
 
-    private var bluetoothSocket: BluetoothSocket? = null
+    private var _bluetoothSocket: BluetoothSocket? = null
+    val bluetoothSocket: BluetoothSocket?
+        get() = _bluetoothSocket
 
     init {
         updatePairedDevices()
@@ -112,18 +114,18 @@ class BluetoothController(private val context: Context) : IBluetoothController {
 
             val bluetoothDevice = bluetoothAdapter?.getRemoteDevice(device.address)
 
-            bluetoothSocket = bluetoothDevice
+            _bluetoothSocket = bluetoothDevice
                 ?.createRfcommSocketToServiceRecord(UUID.fromString(SSP_UUID))
 
             stopDiscovery()
 
-            bluetoothSocket?.let { socket ->
+            _bluetoothSocket?.let { socket ->
                 try {
                     socket.connect()
                     emit(IConnectionResult.ConnectionEstablished)
                 } catch (e: IOException) {
                     socket.close()
-                    bluetoothSocket = null
+                    _bluetoothSocket = null
                     emit(IConnectionResult.Error("Connection was interrupted"))
                 }
             }
@@ -133,8 +135,8 @@ class BluetoothController(private val context: Context) : IBluetoothController {
     }
 
     override fun closeConnection() {
-        bluetoothSocket?.close()
-        bluetoothSocket = null
+        _bluetoothSocket?.close()
+        _bluetoothSocket = null
     }
 
     override fun release() {
