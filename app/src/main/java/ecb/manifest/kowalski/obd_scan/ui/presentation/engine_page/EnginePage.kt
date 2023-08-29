@@ -1,22 +1,40 @@
 package ecb.manifest.kowalski.obd_scan.ui.presentation.engine_page
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.coroutines.delay
 
-@Preview
 @Composable
-fun EnginePage() {
+fun EnginePage(
+    viewModel: EngineViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+) {
+    LaunchedEffect(true) {
+        viewModel.fetchData()
+    }
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            viewModel.fetchData()
+            delay(2500)
+        }
+    }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(text = "Engine Page Component Placeholder")
+
+        val rpmValue = viewModel.rpmData.observeAsState().value
+        Text(text = "Engine RPM: $rpmValue")
     }
 }
