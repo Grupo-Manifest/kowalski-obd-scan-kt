@@ -18,11 +18,15 @@ class EngineViewModel @Inject constructor(
     fun fetchData() {
         val obdManager = ObdManager()
 
+        val bluetoothSocket = bluetoothController.bluetoothSocket
+        getObdData(rpmData, bluetoothSocket?.let { obdManager.getRpm(it) })
+    }
+
+    private fun getObdData(obdData: MutableLiveData<String>, getter: String?) {
         if (bluetoothController.isConnected.value) {
-            val rpmResult = bluetoothController.bluetoothSocket?.let { obdManager.getRpm(it) }
-            rpmData.value = rpmResult
+            obdData.value = getter.toString()
         } else {
-            rpmData.value = "Not connected"
+            obdData.value = "Not connected"
         }
     }
 }
