@@ -38,8 +38,8 @@ fun EnginePage(
     ) {
         Text(text = "Engine Page Component Placeholder")
 
-        Text(text = "Engine RPM: $coolantTemperatureValue")
+        Text(text = "Engine Coolant Temperature: $coolantTemperatureValue")
         Text(text = "Engine RPM: $rpmValue")
-        Text(text = "Engine RPM: $engineThrottleValue")
+        Text(text = "Engine Throttle Position: $engineThrottleValue")
     }
 }
