@@ -20,8 +20,6 @@ class EngineViewModel @Inject constructor(
         })
         getObdData(rpmData, bluetoothSocket?.let { obdManager.getRpm(it) })
         getObdData(engineThrottleData, bluetoothSocket?.let { obdManager.getEngineThrottle(it) })
-
-        getObdData(oxygenSensorData, bluetoothSocket?.let { obdManager.getOxygenSensor(it) })
     }
 
     val coolantTemperatureData: MutableLiveData<String> by lazy {
@@ -31,10 +29,6 @@ class EngineViewModel @Inject constructor(
         MutableLiveData<String>()
     }
     val engineThrottleData: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
-    val oxygenSensorData: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 }
