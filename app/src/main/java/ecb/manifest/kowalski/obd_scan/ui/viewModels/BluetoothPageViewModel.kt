@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import ecb.manifest.kowalski.obd_scan.bluetooth.BluetoothDeviceDomain
 import ecb.manifest.kowalski.obd_scan.bluetooth.IBluetoothController
 import ecb.manifest.kowalski.obd_scan.bluetooth.IConnectionResult
-import ecb.manifest.kowalski.obd_scan.ui.presentation.BluetoothUiState
+import ecb.manifest.kowalski.obd_scan.bluetooth.BluetoothState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +23,7 @@ import javax.inject.Inject
 class BluetoothPageViewModel @Inject constructor(
     private val bluetoothController: IBluetoothController
 ) : ViewModel() {
-    private val _state = MutableStateFlow(BluetoothUiState())
+    private val _state = MutableStateFlow(BluetoothState())
     val state = combine(
         bluetoothController.scannedDevices,
         bluetoothController.pairedDevices,
