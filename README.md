@@ -1,6 +1,5 @@
-> TODO: read OBD data  
-> TODO: Improve UI 
-> TODO: Remove BluetoothPage from TabLayout && Add Navigation to it  
+> TODO: Improve UI <br>
+> TODO: Remove BluetoothPage from TabLayout && Add Navigation to it <br> 
 
 To be added:
 - Fuel Efficiency
