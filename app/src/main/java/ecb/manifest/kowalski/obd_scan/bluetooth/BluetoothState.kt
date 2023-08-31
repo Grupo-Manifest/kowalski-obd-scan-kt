@@ -1,8 +1,6 @@
-package ecb.manifest.kowalski.obd_scan.ui.presentation
+package ecb.manifest.kowalski.obd_scan.bluetooth
 
-import ecb.manifest.kowalski.obd_scan.bluetooth.BluetoothDeviceDomain
-
-data class BluetoothUiState(
+data class BluetoothState(
     val scannedDevices: List<BluetoothDeviceDomain> = emptyList(),
     val pairedDevices: List<BluetoothDeviceDomain> = emptyList(),
     val isConnected: Boolean = false,
