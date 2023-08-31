@@ -21,11 +21,6 @@ class EngineViewModel @Inject constructor(
         getObdData(rpmData, bluetoothSocket?.let { obdManager.getRpm(it) })
         getObdData(engineThrottleData, bluetoothSocket?.let { obdManager.getEngineThrottle(it) })
 
-        getObdData(fuelLevelData, bluetoothSocket?.let { obdManager.getFuelLevel(it) })
-        getObdData(fuelConsumptionRateData, bluetoothSocket?.let {
-            obdManager.getFuelConsumptionRate(it)
-        })
-
         getObdData(oxygenSensorData, bluetoothSocket?.let { obdManager.getOxygenSensor(it) })
     }
 
@@ -36,13 +31,6 @@ class EngineViewModel @Inject constructor(
         MutableLiveData<String>()
     }
     val engineThrottleData: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
-    val fuelLevelData: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val fuelConsumptionRateData: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
