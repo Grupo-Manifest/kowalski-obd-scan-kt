@@ -11,15 +11,44 @@ import javax.inject.Inject
 class EngineViewModel @Inject constructor(
     private val bluetoothController: IBluetoothController
 ) : ViewModel() {
-    val rpmData: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
     fun fetchData() {
         val obdManager = ObdManager()
 
         val bluetoothSocket = bluetoothController.bluetoothSocket
+
+        getObdData(coolantTemperatureData, bluetoothSocket?.let {
+            obdManager.getCoolantTemperature(it)
+        })
         getObdData(rpmData, bluetoothSocket?.let { obdManager.getRpm(it) })
+        getObdData(engineThrottleData, bluetoothSocket?.let { obdManager.getEngineThrottle(it) })
+
+        getObdData(fuelLevelData, bluetoothSocket?.let { obdManager.getFuelLevel(it) })
+        getObdData(fuelConsumptionRateData, bluetoothSocket?.let {
+            obdManager.getFuelConsumptionRate(it)
+        })
+
+        getObdData(oxygenSensorData, bluetoothSocket?.let { obdManager.getOxygenSensor(it) })
+    }
+
+    val coolantTemperatureData: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val rpmData: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val engineThrottleData: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
+    val fuelLevelData: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val fuelConsumptionRateData: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
+    val oxygenSensorData: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
     }
 
     private fun getObdData(obdData: MutableLiveData<String>, getter: String?) {
