@@ -10,7 +10,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
-import androidx.compose.runtime.LaunchedEffect
 import com.iamageo.tablayout.MagicTabItem
 import com.iamageo.tablayout.MagicTabLayout
 import dagger.hilt.android.AndroidEntryPoint
