@@ -7,11 +7,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import ecb.manifest.kowalski.obd_scan.ui.viewModels.obd.FuelViewModel
 
-@Preview
 @Composable
-fun FuelPage() {
+fun FuelPage(
+    viewModel: FuelViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
