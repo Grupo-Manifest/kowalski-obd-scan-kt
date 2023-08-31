@@ -1,7 +1,6 @@
 package ecb.manifest.kowalski.obd_scan.ui.viewModels
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ecb.manifest.kowalski.obd_scan.bluetooth.IBluetoothController
 import ecb.manifest.kowalski.obd_scan.obd.ObdManager
@@ -10,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EngineViewModel @Inject constructor(
     private val bluetoothController: IBluetoothController
-) : ViewModel() {
+) : BaseObdViewModel(bluetoothController) {
     fun fetchData() {
         val obdManager = ObdManager()
 
@@ -49,13 +48,5 @@ class EngineViewModel @Inject constructor(
 
     val oxygenSensorData: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
-    }
-
-    private fun getObdData(obdData: MutableLiveData<String>, getter: String?) {
-        if (bluetoothController.isConnected.value) {
-            obdData.value = getter.toString()
-        } else {
-            obdData.value = "Not connected"
-        }
     }
 }
