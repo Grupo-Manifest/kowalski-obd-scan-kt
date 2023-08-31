@@ -18,7 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import ecb.manifest.kowalski.obd_scan.ui.viewModels.BluetoothPageViewModel
+import ecb.manifest.kowalski.obd_scan.ui.viewModels.bluetooth.BluetoothPageViewModel
 
 @Composable
 fun BluetoothPage(
