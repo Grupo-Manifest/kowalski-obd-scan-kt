@@ -1,4 +1,4 @@
-package ecb.manifest.kowalski.obd_scan.ui.presentation.bluetooth_page
+package ecb.manifest.kowalski.obd_scan.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

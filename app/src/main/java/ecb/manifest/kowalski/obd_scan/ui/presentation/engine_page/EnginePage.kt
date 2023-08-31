@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import ecb.manifest.kowalski.obd_scan.ui.viewModels.EngineViewModel
 import kotlinx.coroutines.delay
 
 @Composable

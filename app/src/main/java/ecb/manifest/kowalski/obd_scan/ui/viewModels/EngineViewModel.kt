@@ -1,4 +1,4 @@
-package ecb.manifest.kowalski.obd_scan.ui.presentation.engine_page
+package ecb.manifest.kowalski.obd_scan.ui.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
