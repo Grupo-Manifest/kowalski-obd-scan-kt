@@ -27,7 +27,9 @@ fun EnginePage(
         }
     }
 
+    val coolantTemperatureValue = viewModel.coolantTemperatureData.observeAsState().value
     val rpmValue = viewModel.rpmData.observeAsState().value
+    val engineThrottleValue = viewModel.engineThrottleData.observeAsState().value
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -36,6 +38,8 @@ fun EnginePage(
     ) {
         Text(text = "Engine Page Component Placeholder")
 
+        Text(text = "Engine RPM: $coolantTemperatureValue")
         Text(text = "Engine RPM: $rpmValue")
+        Text(text = "Engine RPM: $engineThrottleValue")
     }
 }
