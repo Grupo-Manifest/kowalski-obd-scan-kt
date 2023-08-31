@@ -7,7 +7,31 @@ import com.pnuema.android.obd.models.PID
 
 class ObdManager() {
     fun getRpm(socket: BluetoothSocket): String? {
-        val pid = PID(ObdModes.MODE_01, RPM_CODE)
+        return sendCommand(RPM_CODE, socket)
+    }
+
+    fun getCoolantTemperature(socket: BluetoothSocket): String? {
+        return sendCommand(COOLANT_TEMPERATURE_CODE, socket)
+    }
+
+    fun getEngineThrottle(socket: BluetoothSocket): String? {
+        return sendCommand(ENGINE_THROTTLE_CODE, socket)
+    }
+
+    fun getFuelLevel(socket: BluetoothSocket): String? {
+        return sendCommand(FUEL_LEVEL_CODE, socket)
+    }
+
+    fun getFuelConsumptionRate(socket: BluetoothSocket): String? {
+        return sendCommand(FUEL_CONSUMPTION_RATE_CODE, socket)
+    }
+
+    fun getOxygenSensor(socket: BluetoothSocket): String? {
+        return sendCommand(OXYGEN_SENSOR_CODE, socket)
+    }
+
+    private fun sendCommand(pidCode: String, socket: BluetoothSocket): String? {
+        val pid = PID(ObdModes.MODE_01, pidCode)
         val command = OBDCommand(pid)
         command.run(socket.inputStream, socket.outputStream)
 
