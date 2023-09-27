@@ -9,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EngineViewModel @Inject constructor(
     private val webSocketRepository: WebSocketRepository,
-) : BaseObdViewModel(webSocketRepository) {
+) : WebSocketViewModel(webSocketRepository) {
     fun fetchData() {
         val obdManager = ObdManager()
     }
