@@ -11,7 +11,9 @@ class StatusViewModel @Inject constructor(
     private val webSocketRepository: WebSocketRepository,
 ) : WebSocketViewModel(webSocketRepository) {
     fun fetchData() {
-        val obdManager = ObdManager()
+        val obdManager = ObdManager(webSocketRepository)
+
+        oxygenSensorData.postValue(obdManager.getOxygenSensor())
     }
 
     val oxygenSensorData: MutableLiveData<String> by lazy {

@@ -11,7 +11,11 @@ class EngineViewModel @Inject constructor(
     private val webSocketRepository: WebSocketRepository,
 ) : WebSocketViewModel(webSocketRepository) {
     fun fetchData() {
-        val obdManager = ObdManager()
+        val obdManager = ObdManager(webSocketRepository)
+
+        coolantTemperatureData.postValue(obdManager.getCoolantTemperature())
+        rpmData.postValue(obdManager.getRpm())
+        engineThrottleData.postValue(obdManager.getEngineThrottle())
     }
 
     val coolantTemperatureData: MutableLiveData<String> by lazy {

@@ -11,7 +11,10 @@ class FuelViewModel @Inject constructor(
     private val webSocketRepository: WebSocketRepository,
 ) : WebSocketViewModel(webSocketRepository) {
     fun fetchData() {
-        val obdManager = ObdManager()
+        val obdManager = ObdManager(webSocketRepository)
+
+        fuelLevelData.postValue(obdManager.getFuelLevel())
+        fuelConsumptionRateData.postValue(obdManager.getFuelConsumptionRate())
     }
 
     val fuelLevelData: MutableLiveData<String> by lazy {

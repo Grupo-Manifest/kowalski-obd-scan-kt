@@ -11,14 +11,9 @@ import javax.inject.Inject
 open class WebSocketViewModel @Inject constructor(
     private val webSocketRepository: WebSocketRepository,
 ) : ViewModel() {
-    val receivedMessage: LiveData<String> = webSocketRepository.receivedMessage
     fun connectToWebSocket(webSocketUrl: String) {
         Log.d("BaseViewModel", "Attempting to connect to the WebSocket")
         webSocketRepository.connectWebSocket(webSocketUrl)
-    }
-
-    fun getObdData() {
-        webSocketRepository.sendMessage("A")
     }
 
     override fun onCleared() {
