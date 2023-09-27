@@ -1,6 +1,7 @@
 package ecb.manifest.kowalski.obd_scan.ui.viewModels.obd
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,17 +12,14 @@ import javax.inject.Inject
 open class BaseObdViewModel @Inject constructor(
     private val webSocketRepository: WebSocketRepository,
 ) : ViewModel() {
+    val receivedMessage: LiveData<String> = webSocketRepository.receivedMessage
     fun connectToWebSocket(webSocketUrl: String) {
         Log.d("BaseViewModel", "Attempting to connect to the WebSocket")
         webSocketRepository.connectWebSocket(webSocketUrl)
     }
 
-    fun getObdData(obdData: MutableLiveData<String>, getter: String?) {
-        if (true) {
-            obdData.value = getter.toString()
-        } else {
-            obdData.value = "Not connected"
-        }
+    fun getObdData() {
+        webSocketRepository.sendMessage("A")
     }
 
     override fun onCleared() {

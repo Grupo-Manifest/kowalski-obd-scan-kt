@@ -6,6 +6,14 @@ import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 
 class WebSocketListener() : WebSocketListener() {
+    var receivedMessage: String = ""
+
+    private var messageCallback: ((String) -> Unit)? = null
+
+    fun setMessageCallback(callback: (String) -> Unit) {
+        messageCallback = callback
+    }
+
     override fun onOpen(webSocket: WebSocket, response: Response) {
         super.onOpen(webSocket, response)
         webSocket.send("Android Device Connected")
@@ -15,6 +23,9 @@ class WebSocketListener() : WebSocketListener() {
     override fun onMessage(webSocket: WebSocket, text: String) {
         super.onMessage(webSocket, text)
         Log.d(TAG, "onMessage: $text")
+        receivedMessage = text
+
+        messageCallback?.invoke(text)
     }
 
     override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {

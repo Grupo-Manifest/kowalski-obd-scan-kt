@@ -1,5 +1,7 @@
 package ecb.manifest.kowalski.obd_scan.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import ecb.manifest.kowalski.obd_scan.networking.WebSocketListener
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -11,6 +13,16 @@ class WebSocketRepository @Inject constructor(
 ) {
     private val httpClient = OkHttpClient()
     private var webSocket: WebSocket? = null
+
+    private val _receivedMessage = MutableLiveData<String>()
+    val receivedMessage: LiveData<String>
+        get() = _receivedMessage
+
+    init {
+        webSocketListener.setMessageCallback { message ->
+            _receivedMessage.postValue(message)
+        }
+    }
 
     fun connectWebSocket(webSocketUrl: String) {
         val request = Request.Builder()
