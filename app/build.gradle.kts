@@ -91,4 +91,7 @@ dependencies {
 
     // AndroidOBD
     implementation("com.pnuema.android:obd:1.4.0")
+
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 }
