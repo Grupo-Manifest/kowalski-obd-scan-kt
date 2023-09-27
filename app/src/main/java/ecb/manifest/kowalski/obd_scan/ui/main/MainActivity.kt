@@ -20,20 +20,8 @@ import ecb.manifest.kowalski.obd_scan.ui.presentation.status_page.StatusPage
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val bluetoothManager by lazy {
-        applicationContext.getSystemService(BluetoothManager::class.java)
-    }
-    private val bluetoothAdapter by lazy {
-        bluetoothManager?.adapter
-    }
-
-    private val isBluetoothEnabled: Boolean
-        get() = bluetoothAdapter?.isEnabled == true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        checkBluetoothPermissions()
 
         setContent {
             Column() {
@@ -48,33 +36,4 @@ class MainActivity : ComponentActivity() {
         MagicTabItem(title = "Engine") { EnginePage() },
         MagicTabItem(title = "Status") { StatusPage() },
     )
-
-    private fun checkBluetoothPermissions() {
-        val enableBluetoothLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { }
-
-        val permissionLauncher = registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions ->
-            val canEnableBluetooth = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                permissions[Manifest.permission.BLUETOOTH_CONNECT] == true
-            } else true
-
-            if (canEnableBluetooth && !isBluetoothEnabled) {
-                enableBluetoothLauncher.launch(
-                    Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                )
-            }
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            permissionLauncher.launch(
-                arrayOf(
-                    Manifest.permission.BLUETOOTH_SCAN,
-                    Manifest.permission.BLUETOOTH_CONNECT,
-                )
-            )
-        }
-    }
 }
