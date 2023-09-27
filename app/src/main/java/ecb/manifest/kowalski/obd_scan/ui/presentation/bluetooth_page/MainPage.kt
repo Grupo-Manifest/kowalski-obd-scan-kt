@@ -11,10 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import ecb.manifest.kowalski.obd_scan.ui.viewModels.obd.BaseObdViewModel
 
 @Composable
 fun MainPage(
-    context: Context = LocalContext.current
+    viewModel: BaseObdViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         Row(
