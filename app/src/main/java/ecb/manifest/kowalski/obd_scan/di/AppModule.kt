@@ -21,7 +21,6 @@ object AppModule {
     @Provides
     @Singleton
     fun provideWebSocketRepository(
-        httpClient: OkHttpClient,
         webSocketListener: WebSocketListener,
     ): WebSocketRepository = WebSocketRepository(webSocketListener)
 }

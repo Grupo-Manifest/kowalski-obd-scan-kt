@@ -1,19 +1,13 @@
 package ecb.manifest.kowalski.obd_scan.ui.main
 
-import android.Manifest
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothManager
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import com.iamageo.tablayout.MagicTabItem
 import com.iamageo.tablayout.MagicTabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import ecb.manifest.kowalski.obd_scan.ui.presentation.bluetooth_page.BluetoothPage
+import ecb.manifest.kowalski.obd_scan.ui.presentation.bluetooth_page.MainPage
 import ecb.manifest.kowalski.obd_scan.ui.presentation.engine_page.EnginePage
 import ecb.manifest.kowalski.obd_scan.ui.presentation.fuel_page.FuelPage
 import ecb.manifest.kowalski.obd_scan.ui.presentation.status_page.StatusPage
@@ -31,7 +25,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private val tabs = listOf(
-        MagicTabItem(title = "Bluetooth") { BluetoothPage() },
+        MagicTabItem(title = "Main Page") { MainPage() },
         MagicTabItem(title = "Fuel")   { FuelPage()   },
         MagicTabItem(title = "Engine") { EnginePage() },
         MagicTabItem(title = "Status") { StatusPage() },
