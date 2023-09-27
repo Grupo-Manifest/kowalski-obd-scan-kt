@@ -18,55 +18,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import ecb.manifest.kowalski.obd_scan.ui.viewModels.bluetooth.BluetoothPageViewModel
 
 @Composable
 fun BluetoothPage(
-    viewModel: BluetoothPageViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     context: Context = LocalContext.current
 ) {
-    val state by viewModel.state.collectAsState()
-
-    LaunchedEffect(key1 = state.errorMessage) {
-        state.errorMessage?.let { message ->
-            Toast.makeText(
-                context.applicationContext,
-                message,
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
-
     Column(modifier = Modifier.fillMaxSize()) {
-        when {
-            state.isConnecting -> {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
-            }
-            else -> {
-                BluetoothDeviceList(
-                    pairedDevices = state.pairedDevices,
-                    scannedDevices = state.scannedDevices,
-                    onClick = viewModel::connectToDevice,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                )
-            }
-        }
-
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
-            Button(onClick = viewModel::startScan) {
+            Button(onClick = { }) {
                 Text(text = "Start scanning")
             }
 
-            Button(onClick = viewModel::stopScan) {
+            Button(onClick = { }) {
                 Text(text = "Stop scanning")
             }
         }
