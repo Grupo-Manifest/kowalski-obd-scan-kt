@@ -7,9 +7,9 @@ import okhttp3.WebSocket
 import javax.inject.Inject
 
 class WebSocketRepository @Inject constructor(
-    private val httpClient: OkHttpClient,
     private val webSocketListener: WebSocketListener,
 ) {
+    private val httpClient = OkHttpClient()
     private var webSocket: WebSocket? = null
 
     fun connectWebSocket(webSocketUrl: String) {

@@ -16,16 +16,12 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideHttpClient(): OkHttpClient = OkHttpClient()
-
-    @Provides
-    @Singleton
-    fun provideWebSocketListener(): okhttp3.WebSocketListener = WebSocketListener()
+    fun provideWebSocketListener(): WebSocketListener = WebSocketListener()
 
     @Provides
     @Singleton
     fun provideWebSocketRepository(
         httpClient: OkHttpClient,
         webSocketListener: WebSocketListener,
-    ): WebSocketRepository = WebSocketRepository(httpClient, webSocketListener)
+    ): WebSocketRepository = WebSocketRepository(webSocketListener)
 }
