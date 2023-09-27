@@ -89,6 +89,6 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.45")
     kapt("com.google.dagger:hilt-android-compiler:2.45")
 
-    // AndroidOBD
-    implementation("com.pnuema.android:obd:1.4.0")
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 }

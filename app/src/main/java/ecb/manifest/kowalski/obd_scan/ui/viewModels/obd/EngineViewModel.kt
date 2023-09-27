@@ -2,24 +2,20 @@ package ecb.manifest.kowalski.obd_scan.ui.viewModels.obd
 
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import ecb.manifest.kowalski.obd_scan.bluetooth.IBluetoothController
+import ecb.manifest.kowalski.obd_scan.data.repository.WebSocketRepository
 import ecb.manifest.kowalski.obd_scan.obd.ObdManager
 import javax.inject.Inject
 
 @HiltViewModel
 class EngineViewModel @Inject constructor(
-    private val bluetoothController: IBluetoothController
-) : BaseObdViewModel(bluetoothController) {
+    private val webSocketRepository: WebSocketRepository,
+) : WebSocketViewModel(webSocketRepository) {
     fun fetchData() {
-        val obdManager = ObdManager()
+        val obdManager = ObdManager(webSocketRepository)
 
-        val bluetoothSocket = bluetoothController.bluetoothSocket
-
-        getObdData(coolantTemperatureData, bluetoothSocket?.let {
-            obdManager.getCoolantTemperature(it)
-        })
-        getObdData(rpmData, bluetoothSocket?.let { obdManager.getRpm(it) })
-        getObdData(engineThrottleData, bluetoothSocket?.let { obdManager.getEngineThrottle(it) })
+        coolantTemperatureData.postValue(obdManager.getCoolantTemperature())
+        rpmData.postValue(obdManager.getRpm())
+        engineThrottleData.postValue(obdManager.getEngineThrottle())
     }
 
     val coolantTemperatureData: MutableLiveData<String> by lazy {
