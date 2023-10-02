@@ -1,7 +1,6 @@
-package ecb.manifest.kowalski.obd_scan.ui.viewModels.obd
+package ecb.manifest.kowalski.obd_scan.ui.viewModels
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ecb.manifest.kowalski.obd_scan.data.repository.WebSocketRepository
