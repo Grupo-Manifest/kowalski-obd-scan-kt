@@ -1,4 +1,4 @@
-package ecb.manifest.kowalski.obd_scan.ui.theme
+package ecb.manifest.kowalski.obd_scan.ui.values
 
 import androidx.compose.ui.graphics.Color
 
