@@ -1,4 +1,4 @@
-package ecb.manifest.kowalski.obd_scan.ui.presentation.main_page
+package ecb.manifest.kowalski.obd_scan.ui.main
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,7 +23,7 @@ fun MainPage(
         Button(
             colors = ButtonDefaults.buttonColors(PurpleShell),
             onClick = {
-            viewModel.connectToWebSocket(Constants.socketServerUrl)
+                viewModel.connectToWebSocket(Constants.socketServerUrl)
             },
         ) {
             Text(text = "Connect to OBD device")
