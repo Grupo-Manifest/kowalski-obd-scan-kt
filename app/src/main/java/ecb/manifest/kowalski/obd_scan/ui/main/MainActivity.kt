@@ -11,6 +11,7 @@ import ecb.manifest.kowalski.obd_scan.ui.presentation.bluetooth_page.MainPage
 import ecb.manifest.kowalski.obd_scan.ui.presentation.engine_page.EnginePage
 import ecb.manifest.kowalski.obd_scan.ui.presentation.fuel_page.FuelPage
 import ecb.manifest.kowalski.obd_scan.ui.presentation.status_page.StatusPage
+import ecb.manifest.kowalski.obd_scan.ui.theme.PurpleShell
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -18,8 +19,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Column() {
-                MagicTabLayout(tabList = tabs)
+            Column {
+                MagicTabLayout(tabList = tabs, tabIndicatorColor = PurpleShell)
             }
         }
     }
