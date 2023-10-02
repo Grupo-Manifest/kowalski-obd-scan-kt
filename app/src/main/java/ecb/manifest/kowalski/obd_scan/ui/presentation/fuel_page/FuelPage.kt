@@ -9,13 +9,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.LocalGasStation
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import ecb.manifest.kowalski.obd_scan.ui.presentation.ObdPropertyText
 import ecb.manifest.kowalski.obd_scan.ui.values.PurpleShell
 import ecb.manifest.kowalski.obd_scan.ui.values.obd_not_connected
 import ecb.manifest.kowalski.obd_scan.ui.viewModels.obd.FuelViewModel
@@ -42,8 +42,8 @@ fun FuelPage(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(50.dp),
-        contentAlignment = Alignment.TopCenter
+            .padding(all = 25.dp),
+        contentAlignment = Alignment.TopCenter,
     ) {
         Icon(
             Icons.Rounded.LocalGasStation,
@@ -60,9 +60,8 @@ fun FuelPage(
             val fuelLevel = fuelLevelValue ?: obd_not_connected
             val fuelConsumptionRate = fuelConsumptionRateValue ?: obd_not_connected
 
-            Text(text = "Fuel Page Component Placeholder")
-            Text(text = "Fuel Level: $fuelLevel")
-            Text(text = "Fuel Consumption Rate: $fuelConsumptionRate")
+            ObdPropertyText(text = "Fuel Level: $fuelLevel")
+            ObdPropertyText(text = "Fuel Consumption Rate: $fuelConsumptionRate")
         }
     }
 }

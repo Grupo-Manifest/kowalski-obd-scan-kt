@@ -9,13 +9,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.DirectionsCar
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import ecb.manifest.kowalski.obd_scan.ui.presentation.ObdPropertyText
 import ecb.manifest.kowalski.obd_scan.ui.values.PurpleShell
 import ecb.manifest.kowalski.obd_scan.ui.values.obd_not_connected
 import ecb.manifest.kowalski.obd_scan.ui.viewModels.obd.EngineViewModel
@@ -43,8 +43,8 @@ fun EnginePage(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(50.dp),
-        contentAlignment = Alignment.TopCenter
+            .padding(all = 25.dp),
+        contentAlignment = Alignment.TopCenter,
     ) {
         Icon(
             Icons.Rounded.DirectionsCar,
@@ -63,9 +63,9 @@ fun EnginePage(
             val engineRPM = rpmValue ?: obd_not_connected
             val engineThrottle = engineThrottleValue ?: obd_not_connected
 
-            Text(text = "Engine Coolant Temperature: $coolantTemperature")
-            Text(text = "Engine RPM: $engineRPM")
-            Text(text = "Engine Throttle Position: $engineThrottle")
+            ObdPropertyText(text = "Engine Coolant Temperature: $coolantTemperature")
+            ObdPropertyText(text = "Engine RPM: $engineRPM")
+            ObdPropertyText(text = "Engine Throttle: $engineThrottle")
         }
     }
 }
