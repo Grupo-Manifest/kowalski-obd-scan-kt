@@ -1,4 +1,4 @@
-package ecb.manifest.kowalski.obd_scan.ui.presentation.bluetooth_page
+package ecb.manifest.kowalski.obd_scan.ui.presentation.main_page
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Column
 import com.iamageo.tablayout.MagicTabItem
 import com.iamageo.tablayout.MagicTabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import ecb.manifest.kowalski.obd_scan.ui.presentation.bluetooth_page.MainPage
+import ecb.manifest.kowalski.obd_scan.ui.presentation.main_page.MainPage
 import ecb.manifest.kowalski.obd_scan.ui.presentation.engine_page.EnginePage
 import ecb.manifest.kowalski.obd_scan.ui.presentation.fuel_page.FuelPage
 import ecb.manifest.kowalski.obd_scan.ui.presentation.status_page.StatusPage
