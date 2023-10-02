@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import ecb.manifest.kowalski.obd_scan.ui.values.obd_not_connected
 import ecb.manifest.kowalski.obd_scan.ui.viewModels.obd.FuelViewModel
 import kotlinx.coroutines.delay
 
@@ -35,10 +36,11 @@ fun FuelPage(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        val fuelLevel = fuelLevelValue ?: obd_not_connected
+        val fuelConsumptionRate = fuelConsumptionRateValue ?: obd_not_connected
+
         Text(text = "Fuel Page Component Placeholder")
-
-        Text(text = "Fuel Level: $fuelLevelValue")
-
-        Text(text = "Fuel Consumption Rate: $fuelConsumptionRateValue")
+        Text(text = "Fuel Level: $fuelLevel")
+        Text(text = "Fuel Consumption Rate: $fuelConsumptionRate")
     }
 }

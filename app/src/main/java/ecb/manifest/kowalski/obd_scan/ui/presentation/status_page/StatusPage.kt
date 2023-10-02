@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import ecb.manifest.kowalski.obd_scan.ui.values.obd_not_connected
 import ecb.manifest.kowalski.obd_scan.ui.viewModels.obd.StatusViewModel
 import kotlinx.coroutines.delay
 
@@ -35,8 +36,10 @@ fun StatusPage(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        val oxygenSensor = oxygenSensorValue ?: obd_not_connected
+
         Text(text = "Status Page Component Placeholder")
 
-        Text(text = "Oxygen Sensors: $oxygenSensorValue")
+        Text(text = "Oxygen Sensors: $oxygenSensor")
     }
 }

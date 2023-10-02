@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import ecb.manifest.kowalski.obd_scan.ui.values.obd_not_connected
 import ecb.manifest.kowalski.obd_scan.ui.viewModels.obd.EngineViewModel
 import kotlinx.coroutines.delay
 
@@ -38,8 +39,12 @@ fun EnginePage(
     ) {
         Text(text = "Engine Page Component Placeholder")
 
-        Text(text = "Engine Coolant Temperature: $coolantTemperatureValue")
-        Text(text = "Engine RPM: $rpmValue")
-        Text(text = "Engine Throttle Position: $engineThrottleValue")
+        val coolantTemperature = coolantTemperatureValue ?: obd_not_connected
+        val engineRPM = rpmValue ?: obd_not_connected
+        val engineThrottle = engineThrottleValue ?: obd_not_connected
+
+        Text(text = "Engine Coolant Temperature: $coolantTemperature")
+        Text(text = "Engine RPM: $engineRPM")
+        Text(text = "Engine Throttle Position: $engineThrottle")
     }
 }

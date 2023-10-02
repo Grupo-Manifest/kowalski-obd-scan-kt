@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import ecb.manifest.kowalski.obd_scan.data.Constants
-import ecb.manifest.kowalski.obd_scan.ui.theme.PurpleShell
+import ecb.manifest.kowalski.obd_scan.ui.values.PurpleShell
 import ecb.manifest.kowalski.obd_scan.ui.viewModels.WebSocketViewModel
 
 @Composable
