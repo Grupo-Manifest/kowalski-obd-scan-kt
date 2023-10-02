@@ -27,12 +27,19 @@ fun ObdPropertyText(text: String) {
             .background(color = PurpleShell),
         contentAlignment = Alignment.Center,
     ) {
-        Text(text = text, color = Color.White)
+        Text(
+            text = text,
+            color = Color.White,
+            modifier = Modifier.padding(20.dp),
+        )
     }
 }
 
 @Composable
 @Preview
 fun ObdPropertyTextPreview() {
-    ObdPropertyText(text = "Test")
+    ObdPropertyText(
+        text =
+        "Very very very long tested texted text, so large of a text that it goes off the screen"
+    )
 }
