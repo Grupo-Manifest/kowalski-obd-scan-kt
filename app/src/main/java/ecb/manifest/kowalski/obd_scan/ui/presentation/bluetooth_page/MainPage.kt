@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import ecb.manifest.kowalski.obd_scan.data.Constants
-import ecb.manifest.kowalski.obd_scan.ui.viewModels.obd.WebSocketViewModel
+import ecb.manifest.kowalski.obd_scan.ui.viewModels.WebSocketViewModel
 
 @Composable
 fun MainPage(
@@ -21,7 +21,7 @@ fun MainPage(
         Button(onClick = {
             viewModel.connectToWebSocket(Constants.socketServerUrl)
         }) {
-            Text(text = "Connect")
+            Text(text = "Connect to OBD device")
         }
     }
 }
